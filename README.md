@@ -23,5 +23,6 @@ For report page, create a form to search and display data from databae.
 Update the report table: update absense or present if the data already exist; otherwise insert new data into the table.
 # Week 8
 Add a checkbox for student who is late.
+Input the data to database table automatically from the robot by using python.
 # Week 9
 Work on documentation and paper.

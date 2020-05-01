@@ -19,3 +19,9 @@ Make a report page on website that displays the data from database on the table.
 Upload text file .txt created by NAO to the website, insert data from text file to database.
 # Week 6
 For report page, create a form to search and display data from databae.
+# Week 7
+Update the report table: update absense or present if the data already exist; otherwise insert new data into the table.
+# Week 8
+Add a checkbox for student who is late.
+# Week 9
+Work on documentation and paper.

@@ -7,7 +7,7 @@ $database = "id12730815_attendancedb";
 
 
 // Create connection
-$conn = mysqli_connect($servername, $username, $password, $database);
+$conn = mysqli_connect($servername, $username, $password);
 
 //Check connection
 if (!$conn) {
@@ -17,7 +17,7 @@ if (!$conn) {
 echo "Connected successfully<br>"; 
 
 mysqli_select_db($conn,$database);
-// CSCClass
+
 // This is important to prevent injection attacks
 $courseQuery = $_POST['Course'];
 $firstnameQuery = $_POST['FirstName'];
@@ -26,12 +26,6 @@ $dateQuery = $_POST['Date'];
 $attendanceQuery = $_POST['Attendance'];
 $lateQuery = $_POST['Late'];
 
-/*echo $courseQuery . " FORM Course <br>";
-echo $firstnameQuery . " FORM FirstName <br>";
-echo $lasttnameQuery . " FORM LastName <br>";
-echo $dateQuery . "FORM Date <br>";
-echo $attendanceQuery . "FORM Attendance <br>";
-*/
 $att = 0;
 if($attendanceQuery == 'on'):
     $att = 1;
@@ -44,7 +38,7 @@ if($lateQuery == 'on'):
 endif;
 echo $late . "Late <br>";
 
-
+//Insert data to database
     $sql = "INSERT INTO Students(Course,  FirstName, LastName,Date, Attendance, Late) VALUES ('" . $courseQuery . "', '" . $firstnameQuery . "', '" . $lastnameQuery . "','" . $dateQuery . "',  '" . $att . "', '" . $late . "')
       ON DUPLICATE KEY UPDATE  Attendance='" . $att . "', Late ='" . $late . "'" ;
 

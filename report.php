@@ -5,7 +5,8 @@
     $valueToSearch = $_POST['valueToSearch'];
     // search in all table columns
     // using concat mysql function
-    $query = "SELECT * FROM `Students` WHERE CONCAT(`Course`, `FirstName`, `LastName`, `Date`, `Attendance`) LIKE '%".$valueToSearch."%'";
+    $query = "SELECT * FROM `Students` WHERE CONCAT(`Course`, `FirstName`, `LastName`, `Date`, `Attendance`) 
+    LIKE '%".$valueToSearch."%'";
     $search_result = filterTable($query);
     
 }

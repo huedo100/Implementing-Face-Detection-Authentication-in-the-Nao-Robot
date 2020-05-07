@@ -68,14 +68,15 @@ h2{
 }
 </style>
 <h2>Attendence Report</h2>
+	
 <body>
 	/* Create a filter form to search the value looking for */
-  <form action="filter.php" method="post">
+  <form action="filter.php" method="post"> 
             <input type="text" name="valueToSearch" placeholder="Value To Search"><br><br>
             <input type="submit" name="search" value="Filter"><br>
-</form>
+  </form>
 
-	/* Create record table */
+	
 <table>
 <tr>
     <th>Course</th>
@@ -86,8 +87,7 @@ h2{
 	<th>Late</th>
 </tr>
 
-/* Output data stored and display in the table */
-    <?php while($row = mysqli_fetch_array($search_result)) {
+    <?php while($row = mysqli_fetch_array($search_result)) { /* Output data stored and display in the table */
         $courseQuery = $row['Course'];
         $firstnameQuery =$row['FirstName'];
         $lastnameQuery = $row['LastName'];

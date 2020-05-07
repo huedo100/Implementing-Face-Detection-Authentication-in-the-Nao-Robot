@@ -37,12 +37,12 @@
 </html>
  
   <?php
-    $currentDirectory = getcwd();
-    $uploadDirectory = "/files/";
+    $currentDirectory = getcwd(); // get current directoty
+    $uploadDirectory = "/files/"; // specifies the directory where the file is going to be placed
 
     $errors = []; // Store errors here
 
-    $fileExtensionsAllowed = ['txt']; // These will be the only file extensions allowed 
+    $fileExtensionsAllowed = ['txt']; //  only text file  allowed 
 
     $fileName = $_FILES['the_file']['name'];
     $fileSize = $_FILES['the_file']['size'];
@@ -50,34 +50,34 @@
     $fileType = $_FILES['the_file']['type'];
     $fileExtension = strtolower(end(explode('.',$fileName)));
 
-    $uploadPath = $currentDirectory . $uploadDirectory . basename($fileName); 
-
+    $uploadPath = $currentDirectory . $uploadDirectory . basename($fileName);  // specifies the path of the file to be uploaded
+    // Check if we click submit 
     if (isset($_POST['submit'])) {
-        
-    $servername = "localhost";
+        // Connect to database table
+        $servername = "localhost";
 	$username = "id12730815_rbproject";
 	$password = "myproject";
 	$database = "id12730815_attendancedb";
 	
 	$conn =  mysqli_connect($servername, $username, $password);
 	if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+        die("Connection failed: " . mysqli_connect_error());
 	} else {
 	    echo "connect sucessful";
 	}
 	mysqli_select_db($conn,$database);
-
-      if (! in_array($fileExtension,$fileExtensionsAllowed)) {
+       // Check if selected file type is match 
+      if (!in_array($fileExtension,$fileExtensionsAllowed)) {
         $errors[] = "This file extension is not allowed. Please upload a text file";
       }
-
+      // Check file size
       if ($fileSize > 4000000) {
         $errors[] = "File exceeds maximum size (4MB)";
       }
-
+       //Check if $error is set to 0 
       if (empty($errors)) {
         $didUpload = move_uploaded_file($fileTmpName, $uploadPath);
-
+        // Check if file already exists
         if ($didUpload) {
           echo "The file " . basename($fileName) . " has been uploaded";
         } else {
@@ -88,7 +88,7 @@
           echo $error . "These are the errors" . "\n";
         }
       }
-
+    // open the file
     $open = fopen( $uploadPath,'r');
     while (!feof($open)) 
     {
@@ -97,7 +97,8 @@
 	
 	list($courseQuery,$firstnameQuery,$lastnameQuery,$dateQuery,$att) = $explodeLine;
 	
-	$sql = "INSERT INTO Students(Course,  FirstName, LastName,Date, Attendance) VALUES ('" . $courseQuery . "', '" . $firstnameQuery . "', '" . $lastnameQuery . "','" . $dateQuery . "', ' $att')";
+	$sql = "INSERT INTO Students(Course,  FirstName, LastName,Date, Attendance) 
+	VALUES ('" . $courseQuery . "', '" . $firstnameQuery . "', '" . $lastnameQuery . "','" . $dateQuery . "', ' $att')";
 
 	if (mysqli_query($conn, $sql)) {
         echo "New record created successfully<br>";
@@ -107,5 +108,6 @@
     }
  
     fclose($open);
+	    
     }
 ?>

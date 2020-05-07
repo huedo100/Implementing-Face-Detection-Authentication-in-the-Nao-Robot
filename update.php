@@ -26,19 +26,20 @@ $dateQuery = $_POST['Date'];
 $attendanceQuery = $_POST['Attendance'];
 $lateQuery = $_POST['Late'];
 
+//set attendance value default is 0, if it's on, it's 1
 $att = 0;
 if($attendanceQuery == 'on'):
     $att = 1;
 endif;
 echo $att . "Attendance <br>";
-
+//set late value default is 0, if it's on, it's 1
 $late = 0;
 if($lateQuery == 'on'):
     $late = 1;
 endif;
 echo $late . "Late <br>";
 
-//Insert data to database
+//Insert data to database table with on duplicate ket update statement to avoid duplicate value
     $sql = "INSERT INTO Students(Course,  FirstName, LastName,Date, Attendance, Late) VALUES ('" . $courseQuery . "', '" . $firstnameQuery . "', '" . $lastnameQuery . "','" . $dateQuery . "',  '" . $att . "', '" . $late . "')
       ON DUPLICATE KEY UPDATE  Attendance='" . $att . "', Late ='" . $late . "'" ;
 
@@ -48,7 +49,6 @@ echo "New record created successfully<br>";
 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
 
-// echo 'Add record successful.<br>';
-
+// Close the connection to the database server
 mysqli_close($conn);
 ?>

@@ -1,9 +1,8 @@
 <?php
-
+/* Search value in all table columns */
     if(isset($_POST['search']))
 {
     $valueToSearch = $_POST['valueToSearch'];
-    // search in all table columns
     // using concat mysql function
     $query = "SELECT * FROM `Students` WHERE CONCAT(`Course`, `FirstName`, `LastName`, `Date`, `Attendance`) 
     LIKE '%".$valueToSearch."%'";
@@ -20,13 +19,13 @@
 // function to connect and execute the query
 function filterTable($query)
 {
-    $servername = "localhost";
+ $servername = "localhost";
 $username = "id12730815_rbproject";
 $password = "myproject";
 $database = "id12730815_attendancedb";
 
 
-// Create connection
+// Create connection to database
     $connect =  mysqli_connect($servername, $username, $password, $database);
     $filter_Result = mysqli_query($connect, $query);
     return $filter_Result;
@@ -70,11 +69,13 @@ h2{
 </style>
 <h2>Attendence Report</h2>
 <body>
+	/* Create a filter form to search the value looking for */
   <form action="filter.php" method="post">
             <input type="text" name="valueToSearch" placeholder="Value To Search"><br><br>
             <input type="submit" name="search" value="Filter"><br>
 </form>
 
+	/* Create record table */
 <table>
 <tr>
     <th>Course</th>
@@ -85,7 +86,7 @@ h2{
 	<th>Late</th>
 </tr>
 
-
+/* Output data stored and display in the table */
     <?php while($row = mysqli_fetch_array($search_result)) {
         $courseQuery = $row['Course'];
         $firstnameQuery =$row['FirstName'];
